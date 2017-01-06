@@ -425,25 +425,26 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-	  var docPizza = document.querySelectorAll(".randomPizzaContainer");
-	  
-      switch(size) {
-        case "1":
-          dx = 25;
-		  break;
-        case "2":
-          dx = 33.3;
-		  break;
-        case "3":
-          dx = 50;
-		  break;
-        default:
-          console.log("bug in sizeSwitcher"+ size);
-		}
-    for (var i = 0; i < docPizza.length; i++) {
-      docPizza[i].style.width = dx + '%';;
+	 function changePizzaSizes(size) {
+    switch(size) {
+      case "1":
+        newWidth = 25;
+        break;
+      case "2":
+        newWidth = 33.3;
+        break;
+      case "3":
+        newWidth = 50;
+        break;
+      default:
+        console.log("bug in sizeSwitcher");
     }
-	// Child function call is eliminated by geting the elements into parent function and unwanted elemnets are removed
+
+    var randomPizzas = document.querySelectorAll(".randomPizzaContainer");
+
+    for (var i = 0; i < randomPizzas.length; i++) {
+      randomPizzas[i].style.width = newWidth + "%";
+    }
   }
 
   changePizzaSizes(size);
