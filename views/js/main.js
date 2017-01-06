@@ -449,10 +449,24 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+    switch(size) {
+      case "1":
+        newWidth = 20;
+        break;
+      case "2":
+        newWidth = 40;
+        break;
+      case "3":
+        newWidth = 60;
+        break;
+      default:
+        console.log("bug in piza size switching");
+    }
+
+    var randomPizzas = document.querySelectorAll(".randomPizzaContainer");
+
+    for (var i = 0; i < randomPizzas.length; i++) {
+      randomPizzas[i].style.width = newWidth + "%";
     }
   }
 
@@ -498,23 +512,16 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
-   frame++;
+  frame++;
   window.performance.mark("mark_start_frame");
+
+  // precompute the 5 possible phase moves based on the scrollTop postion
+  // to eliminate forced synchronous layout
   var phaseFactor = document.body.scrollTop / 1250;
   var moves = [];
   for (var i = 0; i < 5; i++) {
     moves.push(100 * Math.sin(phaseFactor + (i % 5)));
   }
-
-  // User Timing API to the rescue again. Seriously, it's worth learning.
-  // Super easy to create custom metrics.
-  window.performance.mark("mark_end_frame");
-  window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame");
-  if (frame % 10 === 0) {
-    var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
-    logAverageFrame(timesToUpdatePosition);
-  }
-}
 
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
