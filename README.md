@@ -40,6 +40,7 @@ Identify and perform optimizations to achieve a PageSpeed Insights score of 90 f
 * Refactored the ```updatePositions()``` function to eliminate another forced synchronous layout.
 * Incorporated a ```requestAnimationFrame``` into the scroll function to smooth rendering.
 * Used the ```will-change``` directiev efficiently.
+* The code for generating sliding pizza is refactored. 
 
 #### To check the frame rate and resize time of the optimized version
 * Open up Google Chrome browser
