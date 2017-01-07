@@ -524,11 +524,15 @@ window.addEventListener('scroll', function(e) {
 });
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
-  var cols = 8;
-  var s = 256;
-  // no of pizza that needed in background is calculated
-  var numberOfPizzas = (Math.floor(screen.height) / s) * cols;
-  for (var i = 0; i < numberOfPizzas; i++) {
+  // We have too many moving pizzas. We can only see a few of them
+  // actually displayed on the screen. So it would be better
+  // to set the number of pizzas based on screen size
+  var s = 256; //Number of pixels in pizza bounding box
+  var cols = Math.floor(screen.width / s) + 1;
+  var rows = Math.floor(screen.height / s) + 1;
+  var numPizzas = rows * cols;
+
+  for (var i = 0; i < numPizzas; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
@@ -536,9 +540,8 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-	// call of pizza is driven out side of for loop.
-    //document.querySelector("#movingPizzas1").appendChild(elem);
-	movingpizzas1.appendChild(elem);
+    document.querySelector("#movingPizzas1").appendChild(elem);
   }
   updatePositions();
 });
+
