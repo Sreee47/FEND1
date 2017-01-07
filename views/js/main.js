@@ -424,8 +424,7 @@ var resizePizzas = function(size) {
    // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
 
   // Iterates through pizza elements on the page and changes their widths
-  function changePizzaSizes(size) {
-	 function changePizzaSizes(size) {
+  function changePizzaSizes(size){
     switch(size) {
       case "1":
         newWidth = 25;
@@ -446,6 +445,7 @@ var resizePizzas = function(size) {
       randomPizzas[i].style.width = newWidth + "%";
     }
   }
+
 
   changePizzaSizes(size);
 
@@ -512,6 +512,7 @@ function updatePositions() {
     logAverageFrame(timesToUpdatePosition);
   }
 }
+
 var tick = false;
 window.addEventListener('scroll', function(e) {
   if (!tick) {
@@ -544,4 +545,3 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   updatePositions();
 });
-
